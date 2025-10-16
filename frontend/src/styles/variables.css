@@ -1,0 +1,90 @@
+/* Design System Variables */
+:root {
+    /* Colors */
+    --color-background: rgb(249, 250, 251);
+    --color-foreground: rgb(31, 41, 55);
+    
+    --color-card: rgb(255, 255, 255);
+    --color-card-foreground: rgb(31, 41, 55);
+    
+    --color-primary: rgb(37, 99, 235);
+    --color-primary-foreground: rgb(255, 255, 255);
+    --color-primary-glow: rgb(96, 165, 250);
+    
+    --color-secondary: rgb(139, 92, 246);
+    --color-secondary-foreground: rgb(255, 255, 255);
+    
+    --color-muted: rgb(229, 231, 235);
+    --color-muted-foreground: rgb(107, 114, 128);
+    
+    --color-accent: rgb(251, 146, 60);
+    --color-accent-foreground: rgb(255, 255, 255);
+    
+    --color-destructive: rgb(239, 68, 68);
+    --color-destructive-foreground: rgb(255, 255, 255);
+    
+    --color-success: rgb(34, 197, 94);
+    --color-success-foreground: rgb(255, 255, 255);
+    
+    --color-warning: rgb(251, 146, 60);
+    --color-warning-foreground: rgb(255, 255, 255);
+    
+    --color-border: rgb(229, 231, 235);
+    --color-input: rgb(229, 231, 235);
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, rgb(37, 99, 235), rgb(139, 92, 246));
+    --gradient-card: linear-gradient(to bottom, rgb(255, 255, 255), rgb(249, 250, 251));
+    --gradient-accent: linear-gradient(135deg, rgb(139, 92, 246), rgb(37, 99, 235));
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 8px -2px rgba(31, 41, 55, 0.08);
+    --shadow-md: 0 8px 24px -4px rgba(31, 41, 55, 0.12);
+    --shadow-lg: 0 16px 48px -8px rgba(31, 41, 55, 0.16);
+    --shadow-glow: 0 0 48px rgba(96, 165, 250, 0.3);
+    
+    /* Spacing */
+    --spacing-1: 0.25rem;
+    --spacing-2: 0.5rem;
+    --spacing-3: 0.75rem;
+    --spacing-4: 1rem;
+    --spacing-5: 1.25rem;
+    --spacing-6: 1.5rem;
+    --spacing-8: 2rem;
+    --spacing-10: 2.5rem;
+    --spacing-12: 3rem;
+    --spacing-16: 4rem;
+    --spacing-20: 5rem;
+    
+    /* Border Radius */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-full: 9999px;
+    
+    /* Typography */
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .dark {
+    --color-background: rgb(17, 24, 39);
+    --color-foreground: rgb(249, 250, 251);
+    
+    --color-card: rgb(31, 41, 55);
+    --color-card-foreground: rgb(249, 250, 251);
+    
+    --color-primary: rgb(59, 130, 246);
+    --color-primary-glow: rgb(147, 197, 253);
+    
+    --color-secondary: rgb(167, 139, 250);
+    
+    --color-muted: rgb(55, 65, 81);
+    --color-muted-foreground: rgb(156, 163, 175);
+    
+    --color-border: rgb(55, 65, 81);
+    --color-input: rgb(55, 65, 81);
+  }
+  
