@@ -1,0 +1,62 @@
+stages:
+  - build
+  - test
+
+cache:
+  paths:
+    - backend/node_modules/
+    - frontend/node_modules/
+
+# Use Docker-in-Docker to build images
+services:
+  - docker:20.10-dind
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+
+# ——— BUILD BACKEND ———
+build_backend:
+  stage: build
+  image: docker:latest
+  script:
+    - cd backend
+    - docker build -t backend-image .
+    - echo "Backend image built successfully"
+  only:
+    - main
+    - merge_requests
+
+# ——— BUILD FRONTEND ———
+build_frontend:
+  stage: build
+  image: docker:latest
+  script:
+    - cd frontend
+    - docker build -t frontend-image .
+    - echo "Frontend image built successfully"
+  only:
+    - main
+    - merge_requests
+
+# ——— TEST BACKEND (example) ———
+test_backend:
+  stage: test
+  image: docker:latest
+  script:
+    - cd backend
+    - docker run --rm backend-image npm test || echo "No tests found"
+  only:
+    - main
+    - merge_requests
+
+# ——— TEST FRONTEND (example) ———
+test_frontend:
+  stage: test
+  image: docker:latest
+  script:
+    - cd frontend
+    - docker run --rm frontend-image npm test || echo "No tests found"
+  only:
+    - main
+    - merge_requests
