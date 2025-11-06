@@ -15,7 +15,7 @@ variables:
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
 
-# ——— LINT BACKEND ———
+# ——— LINT + TYPECHECK BACKEND ———
 lint_backend:
   stage: validation
   image: node:18
@@ -27,7 +27,7 @@ lint_backend:
     - main
     - merge_requests
 
-# ——— LINT FRONTEND ———
+# ——— LINT + TYPECHECK FRONTEND ———
 lint_frontend:
   stage: validation
   image: node:18
@@ -35,6 +35,7 @@ lint_frontend:
     - cd frontend
     - npm install
     - npx eslint . || echo "Linting issues (non-blocking)"
+    - npm run typecheck || echo "TypeScript errors (non-blocking)"
   only:
     - main
     - merge_requests
