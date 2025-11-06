@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npm run build
+RUN npm run build   # Only Vite build
 
 FROM node:18-alpine
 RUN npm install -g serve

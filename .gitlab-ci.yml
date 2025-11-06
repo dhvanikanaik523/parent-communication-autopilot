@@ -15,25 +15,26 @@ variables:
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
 
-# ——— VALIDATION / LINT ———
+# ——— LINT BACKEND ———
 lint_backend:
   stage: validation
   image: node:18
   script:
     - cd backend
     - npm install
-    - npx eslint . || echo "Linting errors found but not blocking build"
+    - npx eslint . || echo "Linting issues (non-blocking)"
   only:
     - main
     - merge_requests
 
+# ——— LINT FRONTEND ———
 lint_frontend:
   stage: validation
   image: node:18
   script:
     - cd frontend
     - npm install
-    - npx eslint . || echo "Linting errors found but not blocking build"
+    - npx eslint . || echo "Linting issues (non-blocking)"
   only:
     - main
     - merge_requests
@@ -45,7 +46,7 @@ build_backend:
   script:
     - cd backend
     - docker build -t backend-image .
-    - echo "Backend image built successfully"
+    - echo "Backend image built"
   only:
     - main
     - merge_requests
@@ -57,29 +58,28 @@ build_frontend:
   script:
     - cd frontend
     - docker build -t frontend-image .
-    - echo "Frontend image built successfully"
+    - echo "Frontend image built"
   only:
     - main
     - merge_requests
 
-# ——— TEST BACKEND ———
+# ——— TEST (SKIP IF NO TESTS) ———
 test_backend:
   stage: test
   image: docker:latest
   script:
     - cd backend
-    - docker run --rm backend-image npm test || echo "No tests found"
+    - docker run --rm backend-image npm test || echo "No backend tests"
   only:
     - main
     - merge_requests
 
-# ——— TEST FRONTEND ———
 test_frontend:
   stage: test
   image: docker:latest
   script:
     - cd frontend
-    - docker run --rm frontend-image npm test || echo "No tests found"
+    - docker run --rm frontend-image npm test || echo "No frontend tests"
   only:
     - main
     - merge_requests

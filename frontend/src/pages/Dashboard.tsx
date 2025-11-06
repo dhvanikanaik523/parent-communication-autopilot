@@ -44,7 +44,7 @@ const Dashboard = () => {
         }));
         setAlerts(mappedAlerts);
 
-        const mappedDrafts = mappedAlerts.map((alert) => ({
+        const mappedDrafts = mappedAlerts.map((alert: any) => ({
           id: alert.id,
           student: alert.student,
           subject: `Update on ${alert.student} - ${alert.severity}`,
