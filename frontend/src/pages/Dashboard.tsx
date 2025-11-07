@@ -9,48 +9,63 @@ import { Bell, MessageSquare, Users, AlertTriangle, CheckCircle2, Clock } from "
 import axios from "axios";
 
 const Dashboard = () => {
-  const [alerts, setAlerts] = useState<
-    {
-      id: number;
-      student: string;
-      type: string;
-      severity: string;
-      message: string;
-      date: string;
-    }[]
-  >([]);
-  const [drafts, setDrafts] = useState<
-    {
-      id: number;
-      student: string;
-      subject: string;
-      preview: string;
-      status: string;
-    }[]
-  >([]);
+
+  // Define the raw data interface based on your DB schema and API
+interface RawApiAlert {
+  id: number;
+  rule_id: number | null; // Assuming rule_id can be null if it's an FK
+  student_id: string; 
+  alert_message: string;
+  created_at: string; // TIMESTAMP from DB
+}
+
+// Define the interface for the 'alerts' state (the processed data)
+interface ProcessedAlert {
+  id: number;
+  student: string;
+  type: string;
+  severity: string; // Keep as string since we can't infer the enum (high/medium/low) without assumptions
+  message: string;
+  date: string;
+}
+
+// Define the interface for the 'drafts' state
+interface ProcessedDraft {
+  id: number;
+  student: string;
+  subject: string;
+  preview: string;
+  status: string;
+}
+
+const [alerts, setAlerts] = useState<ProcessedAlert[]>([]);
+const [drafts, setDrafts] = useState<ProcessedDraft[]>([]);
+
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/alerts")
+      .get<RawApiAlert[]>("http://localhost:3000/api/alerts")
       .then((response) => {
-        const mappedAlerts = response.data.map((alert: any) => ({
+        const mappedAlerts: ProcessedAlert[] = response.data.map((alert) => ({
           id: alert.id,
           student: alert.alert_message.split(": ")[0],
-          type: "attendance", // Adjust based on alert type if available
+          type: "attendance", // Adjust based on actual logic later
           severity: alert.priority,
           message: alert.alert_message,
           date: new Date(alert.created_at).toLocaleString(),
         }));
+  
         setAlerts(mappedAlerts);
-
-        const mappedDrafts = mappedAlerts.map((alert: any) => ({
+  
+        const mappedDrafts: ProcessedDraft[] = mappedAlerts.map((alert) => ({
           id: alert.id,
           student: alert.student,
           subject: `Update on ${alert.student} - ${alert.severity}`,
           preview: alert.message,
           status: alert.severity === "high" ? "pending" : "ready",
         }));
+  
         setDrafts(mappedDrafts);
       })
       .catch((error) => {
@@ -58,7 +73,7 @@ const Dashboard = () => {
         setError("Failed to load data. Check the backend.");
       });
   }, []);
-
+  
   if (error) return <div style={{ color: "red" }}>{error}</div>;
   if (!alerts.length && !drafts.length) return <div>Loading...</div>;
 
