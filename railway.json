@@ -1,6 +1,6 @@
 {
   "build": {
-    "builder": "paketo"
+    "builder": "nixpacks"
   },
-  "start": "node index.js"
+  "start": "node backend/index.js"
 }
