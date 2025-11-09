@@ -5,6 +5,7 @@ const express = require('express');
 const { Pool } = require('pg');
 const fetch = require('node-fetch');
 const { spawn } = require('child_process');
+const PORT = process.env.PORT || 3000;
 require('dotenv').config({ path: '../.env' });
 
 
@@ -26,9 +27,17 @@ app.use(cors());
 const nodemailer = require('nodemailer');
 const cron = require('node-cron');
 
+// const pool = new Pool({
+//   host: process.env.DB_HOST,
+//   port: Number(process.env.DB_PORT || 5432),
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD,
+//   database: process.env.DB_NAME,
+// });
+
 const pool = new Pool({
   host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT || 5432),
+  port: process.env.DB_PORT,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
@@ -411,6 +420,11 @@ const transporter = nodemailer.createTransport({
   auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
 });
 
-app.listen(3000, () => console.log('Server on port 3000'));
+// app.listen(3000, () => console.log('Server on port 3000'));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`http://localhost:${PORT}`);
+});
 
 
