@@ -12,6 +12,7 @@ const Dashboard = () => {
 
   // Define the raw data interface based on your DB schema and API
 interface RawApiAlert {
+  priority: any;
   id: number;
   rule_id: number | null; // Assuming rule_id can be null if it's an FK
   student_id: string; 

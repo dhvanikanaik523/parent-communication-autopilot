@@ -1,5 +1,0 @@
-{
-  "root": "backend",
-  "buildCommand": "npm install",
-  "startCommand": "node index.js"
-}
