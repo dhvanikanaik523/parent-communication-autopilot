@@ -41,12 +41,12 @@ interface ProcessedDraft {
 
 const [alerts, setAlerts] = useState<ProcessedAlert[]>([]);
 const [drafts, setDrafts] = useState<ProcessedDraft[]>([]);
-
+const API_URL = "https://parent-communication-autopilot.up.railway.app";
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     axios
-      .get<RawApiAlert[]>("http://localhost:3000/api/alerts")
+      .get<RawApiAlert[]>("${API_URL}/api/alerts")
       .then((response) => {
         const mappedAlerts: ProcessedAlert[] = response.data.map((alert) => ({
           id: alert.id,

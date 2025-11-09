@@ -20,11 +20,11 @@ function EmailEditor() {
     tone: "empathetic",
   }); // Typed useState
   const [loading, setLoading] = useState<boolean>(true); // Typed useState
-
+  const API_URL = "https://parent-communication-autopilot.up.railway.app";
   useEffect(() => {
     setLoading(true);
     axios
-      .get<Email>(`http://localhost:3000/api/email/${alertId}`)
+      .get<Email>(`${API_URL}/api/email/${alertId}`)
       .then((response) => {
         setEmail(response.data);
       })
@@ -40,7 +40,7 @@ function EmailEditor() {
   const handleRedraft = async (newTone: string) => {
     setLoading(true);
     try {
-      const response = await axios.post<Email>(`http://localhost:3000/api/email/${alertId}/redraft`, { tone: newTone });
+      const response = await axios.post<Email>(`${API_URL}/api/email/${alertId}/redraft`, { tone: newTone });
       setEmail(response.data);
     } catch (error) {
       console.error("Error redrafting:", error);
@@ -51,7 +51,7 @@ function EmailEditor() {
 
   const handleSend = async () => {
     try {
-      await axios.post(`http://localhost:3000/api/email/${alertId}`, email);
+      await axios.post(`${API_URL}/api/email/${alertId}`, email);
       navigate("/");
     } catch (error) {
       console.error("Error sending email:", error);
