@@ -94,11 +94,10 @@ deploy_production:
     - echo "Deploying Frontend to Vercel..."
     - cd frontend
     - npm install -g vercel
-    - vercel --prod --token VERCEL_TOKEN --yes --force
+    - vercel --prod --token $VERCEL_TOKEN --yes --force
 
     - echo "Deploying Backend to Railway..."
     - cd ../backend
-    - curl -X POST "https://backboard.railway.app/deploy/RAILWAY_PROJECT_ID?serviceId=RAILWAY_SERVICE_ID" \
-         -H "Authorization: Bearer RAILWAY_TOKEN"
+    - curl -X POST "https://backboard.railway.app/deploy/$RAILWAY_PROJECT_ID?serviceId=$RAILWAY_SERVICE_ID" \-H "Authorization: Bearer $RAILWAY_TOKEN"
   only:
     - main
