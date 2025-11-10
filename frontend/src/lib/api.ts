@@ -1,5 +1,5 @@
 const getBaseUrl = () => {
-  const url = import.meta.env.VITE_API_URL;
+  const url = "https://parent-communication-autopilot-production-4f87.up.railway.app";
   return url && url.trim() !== '' ? url : '';
 };
 
