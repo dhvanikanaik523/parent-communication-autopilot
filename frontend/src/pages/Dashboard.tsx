@@ -12,44 +12,42 @@ import { API_BASE_URL } from "../lib/api";
 const Dashboard = () => {
 
   // Define the raw data interface based on your DB schema and API
-interface RawApiAlert {
-  priority: any;
-  id: number;
-  rule_id: number | null; // Assuming rule_id can be null if it's an FK
-  student_id: string; 
-  alert_message: string;
-  created_at: string; // TIMESTAMP from DB
-}
+  interface RawApiAlert {
+    priority: any;
+    id: number;
+    rule_id: number | null; // Assuming rule_id can be null if it's an FK
+    student_id: string; 
+    alert_message: string;
+    created_at: string; // TIMESTAMP from DB
+  }
 
-// Define the interface for the 'alerts' state (the processed data)
-interface ProcessedAlert {
-  id: number;
-  student: string;
-  type: string;
-  severity: string; // Keep as string since we can't infer the enum (high/medium/low) without assumptions
-  message: string;
-  date: string;
-}
+  // Define the interface for the 'alerts' state (the processed data)
+  interface ProcessedAlert {
+    id: number;
+    student: string;
+    type: string;
+    severity: string; // Keep as string since we can't infer the enum (high/medium/low) without assumptions
+    message: string;
+    date: string;
+  }
 
-// Define the interface for the 'drafts' state
-interface ProcessedDraft {
-  id: number;
-  student: string;
-  subject: string;
-  preview: string;
-  status: string;
-}
+  // Define the interface for the 'drafts' state
+  interface ProcessedDraft {
+    id: number;
+    student: string;
+    subject: string;
+    preview: string;
+    status: string;
+  }
 
-const [alerts, setAlerts] = useState<ProcessedAlert[]>([]);
-const [drafts, setDrafts] = useState<ProcessedDraft[]>([]);
-const API_URL = "https://parent-communication-autopilot.up.railway.app";
+  const [alerts, setAlerts] = useState<ProcessedAlert[]>([]);
+  const [drafts, setDrafts] = useState<ProcessedDraft[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const base = API_BASE_URL ? API_BASE_URL : '';
     axios
-    
-      .get<RawApiAlert[]>("${base}/api/alerts")
+      .get<RawApiAlert[]>(`${base}/api/alerts`)
       .then((response) => {
         const mappedAlerts: ProcessedAlert[] = response.data.map((alert) => ({
           id: alert.id,
@@ -59,9 +57,9 @@ const API_URL = "https://parent-communication-autopilot.up.railway.app";
           message: alert.alert_message,
           date: new Date(alert.created_at).toLocaleString(),
         }));
-  
+
         setAlerts(mappedAlerts);
-  
+
         const mappedDrafts: ProcessedDraft[] = mappedAlerts.map((alert) => ({
           id: alert.id,
           student: alert.student,
@@ -69,7 +67,7 @@ const API_URL = "https://parent-communication-autopilot.up.railway.app";
           preview: alert.message,
           status: alert.severity === "high" ? "pending" : "ready",
         }));
-  
+
         setDrafts(mappedDrafts);
       })
       .catch((error) => {
@@ -77,7 +75,7 @@ const API_URL = "https://parent-communication-autopilot.up.railway.app";
         setError("Failed to load data. Check the backend.");
       });
   }, []);
-  
+
   if (error) return <div style={{ color: "red" }}>{error}</div>;
   if (!alerts.length && !drafts.length) return <div>Loading...</div>;
 
