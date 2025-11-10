@@ -443,7 +443,7 @@ const transporter = nodemailer.createTransport({
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`https://parent-communication-autopilot-production-4f87.up.railway.app${PORT}`);
+  // console.log(`http://localhost:${PORT}`);
 });
 
 
