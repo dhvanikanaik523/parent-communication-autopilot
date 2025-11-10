@@ -8,8 +8,9 @@ const { spawn } = require('child_process');
 const PORT = process.env.PORT || 3000;
 require('dotenv').config({ path: '../.env' });
 
-import pg from "pg";
-const { Pool } = pg;
+
+
+
 
 
 // const transporter.verify((error, success) => {
@@ -54,7 +55,7 @@ const pool = new Pool({
   database: process.env.DB_NAME,
   connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false, // required for Railway
+    rejectUnauthorized: false,
   },
 });
 
@@ -451,5 +452,5 @@ app.listen(PORT, () => {
   // console.log(`http://localhost:${PORT}`);
 });
 
-export default pool;
+
 
