@@ -29,4 +29,4 @@ export default defineConfig([
 ])
 
 export const API_BASE_URL = 
-  import.meta.env.VITE_API_URL || 'https://parent-communication-autopilot.up.railway.app';
+  import.meta.env.VITE_API_URL || 'https://parent-communication-autopilot-production-4f87.up.railway.app';
