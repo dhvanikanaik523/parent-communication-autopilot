@@ -5,7 +5,7 @@ RUN npm ci
 COPY . .
 # ARG VITE_API_URL
 # ENV VITE_API_URL=$VITE_API_URL
-COPY .env .env
+
 RUN npm run build   # Only Vite build
 
 FROM node:18-alpine
