@@ -86,7 +86,7 @@ test_frontend:
     - main
     - merge_requests
 
-    # ——— DEPLOY TO VERCEL + RAILWAY ———
+   # ——— DEPLOY TO VERCEL + RAILWAY ———
 deploy_production:
   stage: deploy
   image: node:18
