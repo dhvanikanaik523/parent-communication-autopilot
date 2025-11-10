@@ -7,6 +7,7 @@ import { Card } from "../components/Card";
 import { Tabs } from "../components/Tabs";
 import { Bell, MessageSquare, Users, AlertTriangle, CheckCircle2, Clock } from "lucide-react";
 import axios from "axios";
+import { API_BASE_URL } from "../lib/api";
 
 const Dashboard = () => {
 
@@ -45,8 +46,10 @@ const API_URL = "https://parent-communication-autopilot.up.railway.app";
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const base = API_BASE_URL ? API_BASE_URL : '';
     axios
-      .get<RawApiAlert[]>("${API_URL}/api/alerts")
+    
+      .get<RawApiAlert[]>("${base}/api/alerts")
       .then((response) => {
         const mappedAlerts: ProcessedAlert[] = response.data.map((alert) => ({
           id: alert.id,
