@@ -24,7 +24,7 @@ export const MessageDraft = ({ draft }: MessageDraftProps) => {
   const [messageText, setMessageText] = useState(draft.preview);
   const [messageId, setMessageId] = useState<number | null>(null);
   const [subject, setSubject] = useState(draft.subject);
-  const API_URL = "https://parent-communication-autopilot.up.railway.app";
+  const API_URL = "https://parent-communication-autopilot-production-4f87.up.railway.app";
 
   // Fetch or generate AI draft on mount
   useEffect(() => {
