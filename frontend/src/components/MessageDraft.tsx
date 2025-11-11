@@ -30,7 +30,7 @@ export const MessageDraft = ({ draft }: MessageDraftProps) => {
   useEffect(() => {
     const fetchDraft = async () => {
       try {
-        const response = await axios.get("${API_URL}/api/email/${draft.id}");
+        const response = await axios.get(`${API_URL}/api/email/${draft.id}`);
         const data = response.data || {};
         setMessageId(data.id ?? null);
         setMessageText(data.body ?? draft.preview);
@@ -48,7 +48,7 @@ export const MessageDraft = ({ draft }: MessageDraftProps) => {
   const handleToneChange = async (newTone: string) => {
     setTone(newTone);
     try {
-      const response = await axios.post("${API_URL}/api/email/${draft.id}/redraft", { tone: newTone });
+      const response = await axios.post(`${API_URL}/api/email/${draft.id}/redraft`, { tone: newTone });
       const drafted = response.data;
       setMessageId(drafted.id ?? null);
       setMessageText(drafted.body ?? draft.preview);
@@ -65,7 +65,7 @@ export const MessageDraft = ({ draft }: MessageDraftProps) => {
   const handleDraft = async () => {
     try {
       console.log("Generating AI draft for alert_id:", draft.id, "with tone:", tone);
-      const response = await axios.get("${API_URL}/api/email/${draft.id}");
+      const response = await axios.get(`${API_URL}/api/email/${draft.id}`);
       const data = response.data || {};
       setMessageId(data.id ?? null);
       setMessageText(data.body ?? draft.preview);
@@ -84,7 +84,7 @@ export const MessageDraft = ({ draft }: MessageDraftProps) => {
     if (!messageId) return;
     try {
       console.log("Sending email with message_id:", messageId);
-      const response = await axios.post("${API_URL}/api/send", { message_id: messageId });
+      const response = await axios.post(`${API_URL}/api/send`, { message_id: messageId });
       console.log("Email sent:", response.data);
       setIsDialogOpen(false);
     } catch (error) {
