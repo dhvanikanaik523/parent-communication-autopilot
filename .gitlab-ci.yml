@@ -86,19 +86,18 @@ test_frontend:
     - main
     - merge_requests
 
-    # ——— DEPLOY TO VERCEL + RAILWAY ———
-deploy_production:
+
+   # ——— DEPLOY TO VERCEL + RAILWAY ———
+deploy:
   stage: deploy
   image: node:18
   script:
     - echo "Deploying Frontend to Vercel..."
     - cd frontend
-    - npm install -g vercel
-    - vercel --prod --token $VERCEL_TOKEN --yes --force
+    - |
+      curl -X POST "https://backboard.railway.app/deploy/$RAILWAY_PROJECT_ID?serviceId=$RAILWAY_SERVICE_ID" \
+      -H "Authorization: Bearer $RAILWAY_TOKEN"
 
-    - echo "Deploying Backend to Railway..."
-    - cd ../backend
-    - curl -X POST "https://backboard.railway.app/deploy/$RAILWAY_PROJECT_ID?serviceId=$RAILWAY_SERVICE_ID" \
-         -H "Authorization: Bearer $RAILWAY_TOKEN"
   only:
     - main
+    
