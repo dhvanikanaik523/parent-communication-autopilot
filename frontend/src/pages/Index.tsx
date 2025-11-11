@@ -23,7 +23,7 @@ const Index = () => {
           </p>
           <div className="hero-actions">
             <Link to="/dashboard">
-              <Button variant="hero" size="lg" style={{ backgroundColor: "white", color:"White" }}>
+              <Button variant="hero" size="lg" style={{ backgroundColor: "white", color:"black" }}>
                 Get Started
                 <ArrowRight size={20} />
               </Button>
