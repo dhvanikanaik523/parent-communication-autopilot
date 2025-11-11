@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     define: {
       // expose the VITE_API_URL value for the build; fall back to empty string
-      'import.meta.env.VITE_API_URL': JSON.stringify(env.VITE_API_URL || '')
+      'import.meta.env.VITE_API_URL': JSON.stringify(env.VITE_API_URL || 'https://parent-communication-autopilot.vercel.app')
     }
   }
 })
