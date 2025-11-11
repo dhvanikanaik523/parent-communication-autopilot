@@ -12,7 +12,7 @@ export const DashboardHeader = () => {
               <span style={{ color: 'white', fontWeight: 'bold', fontSize: '1.125rem' }}>AI</span>
             </div>
             <div>
-              <h1 className="dashboard-logo-text">Parent Communication Autopilot</h1>
+              <h1 className="dashboard-logo-text">Parent Communication Autopilot.</h1>
               <p className="dashboard-logo-subtitle">Teacher Dashboard</p>
             </div>
           </div>
