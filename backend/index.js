@@ -447,7 +447,7 @@ const transporter = nodemailer.createTransport({
 
 
 
-
+app.use('/api', require('./routes/alerts'));
 // Health check route
 app.get('/api/health', (req, res) => {
   res.json({ status: "Backend is LIVE!", timestamp: new Date().toISOString() });
