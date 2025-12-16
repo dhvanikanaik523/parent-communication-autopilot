@@ -445,7 +445,18 @@ const transporter = nodemailer.createTransport({
   auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
 });
 
-// app.listen(3000, () => console.log('Server on port 3000'));
+
+
+
+// Health check route
+app.get('/api/health', (req, res) => {
+  res.json({ status: "Backend is LIVE!", timestamp: new Date().toISOString() });
+});
+
+// Root route (to avoid "Not Found")
+app.get('/', (req, res) => {
+  res.json({ message: "Parent Communication Autopilot Backend is running!" });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
