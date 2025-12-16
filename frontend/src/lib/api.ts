@@ -1,5 +1,5 @@
 const getBaseUrl = () => {
-  const url = "https://parent-communication-autopilot-production-4f87.up.railway.app";
+  const url = "https://parent-communication-autopilot.onrender.com";
   return url && url.trim() !== '' ? url : '';
 };
 

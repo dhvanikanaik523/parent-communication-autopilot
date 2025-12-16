@@ -20,7 +20,7 @@ function EmailEditor() {
     tone: "empathetic",
   }); // Typed useState
   const [loading, setLoading] = useState<boolean>(true); // Typed useState
-  const API_URL = "https://parent-communication-autopilot-production-4f87.up.railway.app";
+  const API_URL = "https://parent-communication-autopilot.onrender.com";
   useEffect(() => {
     setLoading(true);
     axios
